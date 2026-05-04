@@ -85,7 +85,7 @@ app.listen(8080)
 #### (4) Express 미들웨어(Middleware)
 
 ##### 1) 미들웨어 체인 흐름
-![alt text](image-2.png)
+https://github.com/tjg-data/dwitter-lab/blob/main/image-2.png?raw=true
 
 ##### 2) 핵심 개념
 ```

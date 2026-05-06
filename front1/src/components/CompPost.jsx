@@ -1,0 +1,72 @@
+import React, {useRef, useState} 
+
+from "react";
+export default function CompPost() {
+    const nameRef = useRef(null);
+    const addressRef = useRef(null);
+    const initForm = {name: "", address: ""};
+    const [form, setForm] = useState(initForm);
+
+    const handleFormChange = (e) => {
+        const {name, value} = e.target;
+        setForm({...form, [name]: value});
+        };
+    
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        if(nameRef.current.value === ""){
+            alert("이름을 입력하세요.");
+            nameRef.current.focus();
+        } else if(addressRef.current.value === ""){
+            alert("주소를 입력하세요.");
+            addressRef.current.focus();
+        } else {
+            console.log('서버전송 -->', form);
+            const url = "http://localhost:9000/api/post";
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({"formData": form})
+            });
+            const result = await response.status;
+            console.log('result ->' , result);
+            const jsonData = await response.json();
+            jsonData.result? alert("데이터 전송 성공") : alert("데이터 전송 실패");
+            setForm(initForm);
+            
+        }
+    };
+
+    return (
+        <div style={{width:"1000px", margin:"auto"}}>
+            <h1>POST :: 주소 등록 폼</h1>
+            <form onSubmit={handleFormSubmit}>
+                <ul>
+                    <li>
+                        <label htmlFor="name">이름</label>
+                        <input  type="text"
+                                id="name"
+                                name="name"
+                                ref={nameRef}
+                                value={form.name}
+                                onChange={handleFormChange} />
+                    </li>
+                    <li>
+                        <label htmlFor="address">주소</label>
+                        <input  type="text"
+                                id="address"
+                                name="address"
+                                ref={addressRef}
+                                value={form.address}
+                                onChange={handleFormChange} />
+                    </li>
+                    <li>
+                        <button type="submit">등록하기</button>
+                        <button type="button"
+                                onClick={() => {setForm(initForm)}}>다시쓰기</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    );
+}

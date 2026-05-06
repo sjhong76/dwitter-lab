@@ -1,17 +1,21 @@
-## 1. Express 소개
+## 1. Express 개발환경
 
    
-#### (1) State of JS 2025
-
-
-![alt text](image.png)   
-
-
-#### (2) Express를 사용하는 이유
+#### (1) Express 패키지 설치
 ```
-1) 검증된 생태계 - 사용자가 많다
-2) 빠른 서버 생성
-3) 가볍고 유연한 미들웨어 구조    
+1️⃣ 서버 폴더 생성
+    예) mkdir node-server
+
+2️⃣ 폴더 초기화
+    예) cd node-server
+        npm init --yes
+
+3️⃣ express 설치
+    예) npm i express
+        npm i nodemon -save-dev
+
+4️⃣ package.json 확인
+
 ```
 
 #### (3) Express.js 기본 라우팅과 CRUD API
@@ -100,4 +104,4 @@ next()를 호출해야 다음 미들웨어로 넘어갑니다.
     // 처리 로직
     next(); // 다음 미들웨어로 전달
     });
-```
+```30 
